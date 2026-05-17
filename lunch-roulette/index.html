@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 뭐 먹지? | 직장인 점심 메뉴 추천 룰렛 🍽️</title>
+    <meta name="description" content="결정 장애 직장인을 위한 점심 메뉴 추천 룰렛! 기분과 지역에 맞는 맞춤형 점심 메뉴를 뽑아드려요. 스트레스, 피곤함, 가벼운 식사까지 완벽 대응!">
+    <meta name="keywords" content="점심 메뉴 추천, 오늘 뭐 먹지, 직장인 점심, 밥 메뉴 룰렛, 점심 결정 장애">
+    <meta property="og:title" content="오늘 뭐 먹지? | 직장인 점심 메뉴 추천 룰렛">
+    <meta property="og:description" content="기분과 지역에 맞는 맞춤형 점심 메뉴를 뽑아보세요!">
+    <meta property="og:type" content="website">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3114463937796990" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+
+        <!-- ===== HEADER ===== -->
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="logo-block">
+                    <span class="logo-emoji">🍽️</span>
+                    <div>
+                        <h1 class="site-title">오늘 뭐 먹지?</h1>
+                        <p class="site-tagline">직장인 점심 결정 장애 해결사</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== TOP AD ===== -->
+        <div class="ad-wrap top-ad">
+            <span class="ad-label">Advertisement</span>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3114463937796990"
+                 data-ad-slot="auto"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- ===== MAIN ===== -->
+        <main id="main-content">
+
+            <!-- Settings Card -->
+            <section class="card setup-card">
+                <h2 class="card-title">🎛️ 내 상황 설정하기</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="region">📍 지역</label>
+                        <div class="select-wrap">
+                            <select id="region">
+                                <option value="강남역">강남역</option>
+                                <option value="홍대입구">홍대입구</option>
+                                <option value="여의도">여의도</option>
+                                <option value="광화문">광화문</option>
+                                <option value="신촌">신촌</option>
+                                <option value="건대입구">건대입구</option>
+                                <option value="혜화">혜화</option>
+                                <option value="잠실">잠실</option>
+                                <option value="판교">판교</option>
+                                <option value="서초">서초</option>
+                            </select>
+                            <span class="select-arrow">▾</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>😊 지금 내 기분은?</label>
+                    <div class="mood-grid" id="moodGrid">
+                        <button class="mood-btn active" data-mood="random">🎲 아무거나!</button>
+                        <button class="mood-btn" data-mood="stress">🔥 스트레스 폭발</button>
+                        <button class="mood-btn" data-mood="rain">☔ 비 오는 날</button>
+                        <button class="mood-btn" data-mood="tired">😴 피곤해 죽겠다</button>
+                        <button class="mood-btn" data-mood="light">🥗 가볍게 먹고파</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roulette Section -->
+            <section class="roulette-section card">
+                <div class="roulette-display-wrap">
+                    <div class="roulette-glow"></div>
+                    <div class="roulette-board" id="rouletteBoard">
+                        <div class="roulette-inner">
+                            <span id="rouletteText" class="roulette-text">🍽️ 메뉴 대기중</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="spinBtn" class="spin-btn">
+                    <span class="spin-btn-text">🎲 오늘의 메뉴 추천받기!</span>
+                </button>
+            </section>
+
+            <!-- Result Section -->
+            <section id="resultSection" class="result-card card hidden">
+                <div class="result-header">
+                    <span class="result-crown">🎉</span>
+                    <h2 class="result-title">오늘의 추천 메뉴!</h2>
+                </div>
+                <div class="result-menu-box">
+                    <span id="resultMenu" class="result-menu-text">제육볶음</span>
+                </div>
+                <div class="result-meta" id="resultMeta"></div>
+                <p class="search-tip">💡 가까운 맛집을 바로 검색해보세요!</p>
+                <div class="map-btns">
+                    <a id="naverMapLink" href="#" target="_blank" rel="noopener" class="map-btn naver">
+                        <span>N</span> 네이버 지도
+                    </a>
+                    <a id="kakaoMapLink" href="#" target="_blank" rel="noopener" class="map-btn kakao">
+                        <span>K</span> 카카오맵
+                    </a>
+                </div>
+                <button class="retry-btn" id="retryBtn">↩ 다른 메뉴 뽑기</button>
+            </section>
+
+            <!-- History Section -->
+            <section class="card history-card" id="historyCard" style="display:none;">
+                <h2 class="card-title">📋 오늘 뽑은 메뉴 기록</h2>
+                <ul class="history-list" id="historyList"></ul>
+            </section>
+
+            <!-- Mid Ad -->
+            <div class="ad-wrap mid-ad">
+                <span class="ad-label">Sponsor</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-3114463937796990"
+                     data-ad-slot="auto"
+                     data-ad-format="rectangle"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+        </main>
+
+        <!-- ===== INFO SECTION (콘텐츠 풍부함 - AdSense 품질 향상) ===== -->
+        <section class="info-section">
+            <h2 class="info-section-title">🍜 직장인 점심, 이렇게 고르면 어때요?</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <span class="tip-icon">🔥</span>
+                    <h3>스트레스 받을 때</h3>
+                    <p>매운 음식이 스트레스 해소에 효과적! 마라탕, 불닭, 낙지볶음처럼 얼얼한 메뉴로 기분 전환해보세요.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">☔</span>
+                    <h3>비 오는 날엔</h3>
+                    <p>따끈한 국물이 최고! 칼국수, 순대국, 부대찌개처럼 몸을 따뜻하게 해주는 메뉴를 선택해보세요.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">😴</span>
+                    <h3>피곤할 때는</h3>
+                    <p>단백질이 풍부한 음식으로 에너지를 충전! 삼겹살, 소고기, 삼계탕으로 오후를 버텨보세요.</p>
+                </div>
+                <div class="tip-card">
+                    <span class="tip-icon">🥗</span>
+                    <h3>가볍게 먹고 싶다면</h3>
+                    <p>포케, 샐러드, 김밥처럼 가볍지만 영양은 충분한 메뉴로 몸도 마음도 가뿐하게!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p class="footer-main">🍽️ 오늘 뭐 먹지? — 직장인 점심 메뉴 추천 서비스</p>
+                <p class="footer-sub">© 2026 오늘 뭐 먹지? All rights reserved. | 본 서비스는 즐거운 점심 선택을 위해 만들어졌습니다.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
