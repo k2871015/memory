@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘 뭐 먹지? | 직장인 점심 메뉴 추천 룰렛 🍽️</title>
-    <meta name="description" content="결정 장애 직장인을 위한 점심 메뉴 추천 룰렛! 기분과 지역에 맞는 맞춤형 점심 메뉴를 뽑아드려요. 스트레스, 피곤함, 가벼운 식사까지 완벽 대응!">
-    <meta name="keywords" content="점심 메뉴 추천, 오늘 뭐 먹지, 직장인 점심, 밥 메뉴 룰렛, 점심 결정 장애">
+    <meta name="description" content="결정 장애 직장인을 위한 점심 메뉴 추천 룰렛! 기분, 칼로리, 내 위치에 맞는 맞춤형 점심 메뉴를 뽑아드려요. 이번 주 뭐 먹었는지 기록도 확인하세요!">
+    <meta name="keywords" content="점심 메뉴 추천, 오늘 뭐 먹지, 직장인 점심, 밥 메뉴 룰렛, 점심 결정 장애, 칼로리 점심">
     <meta property="og:title" content="오늘 뭐 먹지? | 직장인 점심 메뉴 추천 룰렛">
-    <meta property="og:description" content="기분과 지역에 맞는 맞춤형 점심 메뉴를 뽑아보세요!">
+    <meta property="og:description" content="기분, 칼로리, 내 위치에 맞는 맞춤형 점심 메뉴를 뽑아보세요!">
     <meta property="og:type" content="website">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3114463937796990" crossorigin="anonymous"></script>
@@ -21,13 +21,11 @@
 
         <!-- ===== HEADER ===== -->
         <header class="site-header">
-            <div class="header-inner">
-                <div class="logo-block">
-                    <span class="logo-emoji">🍽️</span>
-                    <div>
-                        <h1 class="site-title">오늘 뭐 먹지?</h1>
-                        <p class="site-tagline">직장인 점심 결정 장애 해결사</p>
-                    </div>
+            <div class="logo-block">
+                <span class="logo-emoji">🍽️</span>
+                <div>
+                    <h1 class="site-title">오늘 뭐 먹지?</h1>
+                    <p class="site-tagline">직장인 점심 결정 장애 해결사</p>
                 </div>
             </div>
         </header>
@@ -47,11 +45,12 @@
         <!-- ===== MAIN ===== -->
         <main id="main-content">
 
-            <!-- Settings Card -->
+            <!-- SETUP CARD -->
             <section class="card setup-card">
                 <h2 class="card-title">🎛️ 내 상황 설정하기</h2>
 
-                <div class="form-row">
+                <!-- Location Row -->
+                <div class="location-row">
                     <div class="form-group">
                         <label for="region">📍 지역</label>
                         <div class="select-wrap">
@@ -70,8 +69,24 @@
                             <span class="select-arrow">▾</span>
                         </div>
                     </div>
+                    <!-- GPS Button -->
+                    <button class="gps-btn" id="gpsBtn" title="내 위치로 검색">
+                        <span id="gpsBtnText">📡 내 위치 사용</span>
+                    </button>
+                </div>
+                <p class="gps-status" id="gpsStatus"></p>
+
+                <!-- 🎯 Calorie Mode -->
+                <div class="form-group calorie-group">
+                    <label>🎯 칼로리 모드</label>
+                    <div class="calorie-mode-grid" id="calorieModeGrid">
+                        <button class="calorie-btn active" data-cal="all">🍽️ 상관없어</button>
+                        <button class="calorie-btn" data-cal="light">🥗 다이어트 중 (~500kcal)</button>
+                        <button class="calorie-btn" data-cal="feast">💪 오늘은 많이 먹어!</button>
+                    </div>
                 </div>
 
+                <!-- Mood -->
                 <div class="form-group">
                     <label>😊 지금 내 기분은?</label>
                     <div class="mood-grid" id="moodGrid">
@@ -84,31 +99,43 @@
                 </div>
             </section>
 
-            <!-- Roulette Section -->
+            <!-- ROULETTE SECTION -->
             <section class="roulette-section card">
                 <div class="roulette-display-wrap">
                     <div class="roulette-glow"></div>
                     <div class="roulette-board" id="rouletteBoard">
                         <div class="roulette-inner">
-                            <span id="rouletteText" class="roulette-text">🍽️ 메뉴 대기중</span>
+                            <span id="rouletteText" class="roulette-text">🎲 버튼을 눌러보세요!</span>
                         </div>
                     </div>
                 </div>
                 <button id="spinBtn" class="spin-btn">
-                    <span class="spin-btn-text">🎲 오늘의 메뉴 추천받기!</span>
+                    <span>🎲 오늘의 메뉴 추천받기!</span>
                 </button>
             </section>
 
-            <!-- Result Section -->
+            <!-- RESULT CARD -->
             <section id="resultSection" class="result-card card hidden">
                 <div class="result-header">
                     <span class="result-crown">🎉</span>
                     <h2 class="result-title">오늘의 추천 메뉴!</h2>
                 </div>
                 <div class="result-menu-box">
-                    <span id="resultMenu" class="result-menu-text">제육볶음</span>
+                    <span id="resultMenu" class="result-menu-text"></span>
+                    <div class="result-cal-badge" id="resultCalBadge"></div>
                 </div>
-                <div class="result-meta" id="resultMeta"></div>
+                <p class="result-desc" id="resultDesc"></p>
+                <p class="result-meta" id="resultMeta"></p>
+
+                <!-- ⭐ Like Button -->
+                <div class="like-row">
+                    <button class="like-btn" id="likeBtn">
+                        <span class="like-icon" id="likeIcon">🤍</span>
+                        <span id="likeBtnText">맛있었어요!</span>
+                        <span class="like-count" id="likeCount"></span>
+                    </button>
+                </div>
+
                 <p class="search-tip">💡 가까운 맛집을 바로 검색해보세요!</p>
                 <div class="map-btns">
                     <a id="naverMapLink" href="#" target="_blank" rel="noopener" class="map-btn naver">
@@ -121,10 +148,10 @@
                 <button class="retry-btn" id="retryBtn">↩ 다른 메뉴 뽑기</button>
             </section>
 
-            <!-- History Section -->
-            <section class="card history-card" id="historyCard" style="display:none;">
-                <h2 class="card-title">📋 오늘 뽑은 메뉴 기록</h2>
-                <ul class="history-list" id="historyList"></ul>
+            <!-- ⭐ HALL OF FAME -->
+            <section class="card hall-card" id="hallCard" style="display:none;">
+                <h2 class="card-title">🏆 인기 메뉴 명예의 전당</h2>
+                <ul class="hall-list" id="hallList"></ul>
             </section>
 
             <!-- Mid Ad -->
@@ -139,9 +166,19 @@
                 <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             </div>
 
+            <!-- 🗓️ WEEKLY HISTORY -->
+            <section class="card history-card" id="historyCard" style="display:none;">
+                <div class="history-header-row">
+                    <h2 class="card-title" style="margin-bottom:0;">🗓️ 이번 주 뭐 먹었지?</h2>
+                    <button class="clear-btn" id="clearHistoryBtn">전체 삭제</button>
+                </div>
+                <p class="history-sub">최근 7일간 뽑은 메뉴 기록입니다. 중복은 피해드려요!</p>
+                <ul class="history-list" id="historyList"></ul>
+            </section>
+
         </main>
 
-        <!-- ===== INFO SECTION (콘텐츠 풍부함 - AdSense 품질 향상) ===== -->
+        <!-- INFO SECTION -->
         <section class="info-section">
             <h2 class="info-section-title">🍜 직장인 점심, 이렇게 고르면 어때요?</h2>
             <div class="tips-grid">
@@ -156,19 +193,19 @@
                     <p>따끈한 국물이 최고! 칼국수, 순대국, 부대찌개처럼 몸을 따뜻하게 해주는 메뉴를 선택해보세요.</p>
                 </div>
                 <div class="tip-card">
-                    <span class="tip-icon">😴</span>
-                    <h3>피곤할 때는</h3>
-                    <p>단백질이 풍부한 음식으로 에너지를 충전! 삼겹살, 소고기, 삼계탕으로 오후를 버텨보세요.</p>
+                    <span class="tip-icon">🎯</span>
+                    <h3>다이어트 중이라면</h3>
+                    <p>포케, 샐러드, 냉모밀처럼 500kcal 미만의 가벼운 메뉴를 칼로리 모드로 골라보세요!</p>
                 </div>
                 <div class="tip-card">
-                    <span class="tip-icon">🥗</span>
-                    <h3>가볍게 먹고 싶다면</h3>
-                    <p>포케, 샐러드, 김밥처럼 가볍지만 영양은 충분한 메뉴로 몸도 마음도 가뿐하게!</p>
+                    <span class="tip-icon">💪</span>
+                    <h3>오늘은 마음껏!</h3>
+                    <p>삼겹살, 마라탕, 부대찌개처럼 든든하고 풍성한 메뉴로 오늘 하루 에너지를 충전하세요!</p>
                 </div>
             </div>
         </section>
 
-        <!-- ===== FOOTER ===== -->
+        <!-- FOOTER -->
         <footer class="site-footer">
             <div class="footer-inner">
                 <p class="footer-main">🍽️ 오늘 뭐 먹지? — 직장인 점심 메뉴 추천 서비스</p>
