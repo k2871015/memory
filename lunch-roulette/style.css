@@ -83,6 +83,8 @@ body::before {
 .site-header {
     padding: 2.5rem 0 1.25rem;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     animation: fadein .7s ease-out;
 }
@@ -429,6 +431,24 @@ body::before {
 .tip-icon { font-size:1.6rem; display:block; margin-bottom:.6rem; }
 .tip-card h3 { font-size:.9rem; font-weight:700; margin-bottom:.4rem; }
 .tip-card p { font-size:.78rem; color:var(--text-sub); line-height:1.6; }
+
+/* ===== Navigation & Footer Links ===== */
+.top-nav {
+    display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; width: 100%;
+}
+.top-nav a {
+    color: var(--text-sub); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s;
+}
+.top-nav a:hover { color: var(--orange); }
+
+.footer-nav {
+    display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.2rem; align-items: center;
+}
+.footer-nav a {
+    color: var(--text-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.3s;
+}
+.footer-nav a:hover { color: var(--orange); }
+.footer-nav .divider { color: var(--border); font-size: 0.8rem; }
 
 /* ===== Footer ===== */
 .site-footer {
