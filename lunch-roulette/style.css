@@ -54,7 +54,7 @@ body::before {
     z-index: 1;
     max-width: 680px;
     margin: 0 auto;
-    padding: 0 1.25rem 4rem;
+    padding: 0 1.25rem 6rem; /* 하단 앵커 광고(Anchor Ads) 확보 공간 */
 }
 
 /* ===== Card ===== */
