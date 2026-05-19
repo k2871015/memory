@@ -184,6 +184,11 @@ body::before {
     font-family: var(--font-ko); font-size: .95rem;
     appearance: none; cursor: pointer; outline: none;
     transition: border-color .25s, background .25s;
+    color-scheme: dark;
+}
+.select-wrap select option {
+    background: var(--bg2);
+    color: var(--text);
 }
 .select-wrap select:focus {
     border-color: var(--orange);
@@ -475,3 +480,50 @@ body::before {
     .gps-btn { width:100%; }
     .map-btns { flex-direction:column; align-items:center; }
 }
+
+/* ===== Action & Drink Section ===== */
+.action-box {
+    background: rgba(102, 187, 106, 0.1);
+    border: 1px dashed rgba(102, 187, 106, 0.4);
+    border-radius: var(--r-sm);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--green);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.drink-section {
+    margin-top: 2rem;
+    border-color: rgba(77, 208, 225, 0.3);
+    box-shadow: 0 0 30px rgba(77, 208, 225, 0.12);
+    text-align: center;
+}
+.drink-header {
+    display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 1.5rem;
+}
+.drink-title { font-size: 1.1rem; font-weight: 700; color: var(--teal); }
+.drink-spin-btn {
+    padding: 0.8rem 1.5rem; background: rgba(77, 208, 225, 0.15); border: 1px solid rgba(77, 208, 225, 0.4);
+    border-radius: var(--r-sm); color: var(--teal); font-weight: 700; cursor: pointer;
+    transition: all 0.25s; margin-bottom: 1rem; width: 100%;
+}
+.drink-spin-btn:hover { background: rgba(77, 208, 225, 0.25); transform: translateY(-2px); }
+.drink-result {
+    font-size: 1.6rem; font-weight: 900; color: var(--teal); margin: 1rem 0; display: none;
+}
+.drink-desc { font-size: 0.85rem; color: var(--text-sub); margin-bottom: 1rem; display: none; }
+
+/* ===== Share Section ===== */
+.share-wrap {
+    margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--border); padding-top: 1.5rem;
+}
+.share-title { font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-sub); }
+.share-btns { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; }
+.share-btn {
+    padding: 0.6rem 1rem; border-radius: 100px; border: none; color: #fff; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: transform 0.2s;
+}
+.share-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.share-kakao { background-color: #FEE500; color: #000; }
+.share-tg { background-color: #0088cc; }
+.share-link { background-color: #333; border: 1px solid var(--border); }
+

@@ -149,6 +149,9 @@
                 <p class="result-desc" id="resultDesc"></p>
                 <p class="result-meta" id="resultMeta"></p>
 
+                <!-- Post-meal Action Box -->
+                <div class="action-box" id="actionBox" style="display:none;"></div>
+
                 <!-- ⭐ Like Button -->
                 <div class="like-row">
                     <button class="like-btn" id="likeBtn">
@@ -161,13 +164,34 @@
                 <p class="search-tip">💡 가까운 맛집을 바로 검색해보세요!</p>
                 <div class="map-btns">
                     <a id="naverMapLink" href="#" target="_blank" rel="noopener" class="map-btn naver">
-                        <span>N</span> 네이버 지도
+                        <span>N</span> 네이버 맛집 검색
                     </a>
                     <a id="kakaoMapLink" href="#" target="_blank" rel="noopener" class="map-btn kakao">
-                        <span>K</span> 카카오맵
+                        <span>K</span> 카카오 맛집 검색
                     </a>
                 </div>
                 <button class="retry-btn" id="retryBtn">↩ 다른 메뉴 뽑기</button>
+
+                <!-- Share Section -->
+                <div class="share-wrap">
+                    <p class="share-title">오늘의 메뉴 공유하기 🔗</p>
+                    <div class="share-btns">
+                        <button class="share-btn share-kakao" id="shareKakaoBtn">💬 공유하기</button>
+                        <button class="share-btn share-tg" id="shareTgBtn">✈️ 텔레그램</button>
+                        <button class="share-btn share-link" id="shareLinkBtn">🔗 링크 복사</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DRINK RECOMMENDATION SECTION -->
+            <section id="drinkSection" class="card drink-section hidden">
+                <div class="drink-header">
+                    <span class="drink-icon">🥤</span>
+                    <h2 class="drink-title">식후엔 음료 한 잔!</h2>
+                </div>
+                <button id="drinkSpinBtn" class="drink-spin-btn">☕ 오늘 나에게 어울리는 음료는?</button>
+                <div id="drinkResult" class="drink-result"></div>
+                <p id="drinkDesc" class="drink-desc"></p>
             </section>
 
             <!-- ⭐ HALL OF FAME -->
