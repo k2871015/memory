@@ -527,3 +527,58 @@ body::before {
 .share-tg { background-color: #0088cc; }
 .share-link { background-color: #333; border: 1px solid var(--border); }
 
+/* ===== Dictionary Section ===== */
+.dictionary-section {
+    margin-top: 2rem;
+    border-color: rgba(255, 112, 67, 0.2);
+    box-shadow: 0 0 30px rgba(255, 112, 67, 0.08);
+}
+.dict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+.dict-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 1.2rem;
+    transition: all 0.25s;
+}
+.dict-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+.dict-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+}
+.dict-emoji {
+    font-size: 1.6rem;
+}
+.dict-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--orange);
+}
+.dict-kcal {
+    font-size: 0.75rem;
+    color: var(--amber);
+    font-weight: 600;
+    display: block;
+    margin-top: 1px;
+}
+.dict-desc {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+    .dict-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
