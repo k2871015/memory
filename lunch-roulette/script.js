@@ -456,4 +456,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== INIT =====
     renderHistory();
     renderHallOfFame();
+
+    // --- Cookie Consent Checker ---
+    const consent = localStorage.getItem('cookie-consent');
+    const banner = document.getElementById('cookie-banner');
+    if (consent === 'accepted' && banner) {
+        banner.style.display = 'none';
+    } else if (banner) {
+        banner.style.display = 'flex';
+    }
 });
+
+// Global function for Cookie Accept button
+window.acceptCookies = function() {
+    localStorage.setItem('cookie-consent', 'accepted');
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.opacity = '0';
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 300);
+    }
+};
+
