@@ -653,3 +653,113 @@ body::before {
     display: none !important;
 }
 
+/* Contact Form Styles */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+    padding: .85rem 1.2rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-family: var(--font-ko);
+    font-size: .95rem;
+    outline: none;
+    transition: border-color .25s, background .25s, box-shadow .25s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+    border-color: var(--orange);
+    background: rgba(255, 112, 67, 0.05);
+    box-shadow: 0 0 10px rgba(255, 112, 67, 0.2);
+}
+
+.contact-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.contact-form .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--orange), var(--amber));
+    border: none;
+    border-radius: var(--r-sm);
+    color: #fff;
+    font-family: var(--font-ko);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 15px rgba(255, 112, 67, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-form .submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 112, 67, 0.4);
+    filter: brightness(1.1);
+}
+
+.contact-form .submit-btn:active {
+    transform: translateY(0);
+}
+
+.contact-form .submit-btn:disabled {
+    background: var(--text-dim);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.error-message {
+    color: var(--rose);
+    font-size: 0.78rem;
+    display: block;
+    margin-top: 4px;
+    min-height: 16px;
+}
+
+.form-success-container,
+.form-error-container {
+    display: none; /* Managed by Formspree SDK */
+    padding: 1rem;
+    border-radius: var(--r-sm);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    animation: fadein 0.3s ease-out;
+}
+
+.form-success-container {
+    background: rgba(102, 187, 106, 0.1);
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+
+.form-error-container {
+    background: rgba(240, 98, 146, 0.1);
+    border: 1px solid var(--rose);
+    color: var(--rose);
+}
+
+/* Disqus Thread Container */
+.disqus-container {
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    width: 100%;
+}
+
