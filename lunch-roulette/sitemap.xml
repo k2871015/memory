@@ -8,14 +8,20 @@
     </url>
     <url>
         <loc>https://memory-8nw.pages.dev/privacy.html</loc>
-        <lastmod>2026-05-28</lastmod>
+        <lastmod>2026-06-02</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://memory-8nw.pages.dev/terms.html</loc>
-        <lastmod>2026-05-28</lastmod>
+        <lastmod>2026-06-02</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://memory-8nw.pages.dev/diet-guide.html</loc>
+        <lastmod>2026-06-02</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
 </urlset>

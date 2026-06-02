@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직장인 건강 식단 가이드 & 영양 관리 팁 | 오늘 뭐 먹지? 🍽️</title>
+    <meta name="description" content="바쁜 직장인들을 위한 혈당 관리, 식후 식곤증 예방, 나트륨 조절법 및 건강한 점심 메뉴 선택 가이드를 제공합니다.">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .guide-content {
+            line-height: 1.9;
+            color: var(--text-sub);
+            font-size: 0.98rem;
+        }
+        .guide-content h2 {
+            color: var(--teal);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-top: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        .guide-content h3 {
+            color: var(--orange);
+            font-size: 1.15rem;
+            margin-top: 1.6rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+        .guide-content p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        .guide-content ul, .guide-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .guide-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+        .highlight-box {
+            background: rgba(77, 208, 225, 0.05);
+            border-left: 4px solid var(--teal);
+            padding: 1.2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+        .highlight-box h4 {
+            color: var(--teal);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        .back-btn-wrap {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            background: linear-gradient(135deg, var(--teal), #00acc1);
+            border: none;
+            border-radius: var(--r-md);
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 172, 193, 0.3);
+            transition: all 0.25s;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 172, 193, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- ===== HEADER ===== -->
+        <header class="site-header" id="top">
+            <nav class="top-nav">
+                <a href="index.html">홈</a>
+                <a href="diet-guide.html" class="active">영양 식단 가이드</a>
+                <a href="index.html#main-content">메뉴추천</a>
+                <a href="index.html#info-section">꿀팁</a>
+            </nav>
+            <div class="logo-block">
+                <span class="logo-emoji">🥗</span>
+                <div>
+                    <h1 class="site-title">영양 &amp; 식단 가이드</h1>
+                    <p class="site-tagline">오늘 뭐 먹지? 건강 콘텐츠 채널</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== CONTENT CARD ===== -->
+        <main class="card">
+            <article class="guide-content">
+                <h1 style="color: white; font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem;">🥗 직장인을 위한 점심 영양 밸런스 및 식생활 솔루션</h1>
+                <p style="color: var(--orange); font-weight: 500; margin-bottom: 2rem;">혈당 스파이크 차단과 나트륨 배출로 오후 업무 활력 극대화하기</p>
+
+                <p>
+                    많은 직장인들이 평일 점심 식사 후 오후 2시에서 3시 사이에 심한 피로감과 졸음에 시달립니다. 이는 단순히 업무 피로 때문만이 아니라 점심 식단에서 비롯되는 급격한 혈당 변동, 즉 **혈당 스파이크(Blood Sugar Spike)**가 핵심 원인입니다. 바쁜 회사 생활 속에서 영양 밸런스를 고려한 메뉴를 스마트하게 고르고 식사 순서를 조정하는 것만으로도 오후의 집중력을 배가시키고 만성 피로와 당뇨 등의 성인병 위험을 대폭 낮출 수 있습니다.
+                </p>
+
+                <h2>1. 혈당 스파이크와 식곤증(Food Coma)의 메커니즘</h2>
+                <p>
+                    우리가 짜장면, 백미밥, 라면 등 정제된 탄수화물을 섭취하면 소화 과정에서 포도당으로 분해되어 혈액으로 빠르게 흡수됩니다. 이로 인해 혈당 수치가 급격히 치솟게 되고, 우리 몸의 췌장은 과도한 혈당을 낮추기 위해 인슐린(Insulin) 호르몬을 대량으로 방출합니다.
+                </p>
+                <p>
+                    과잉 분비된 인슐린으로 인해 혈당이 정상 범위 이하로 급격히 추락하게 되는 이 현상을 '저혈당 반동'이라고 부릅니다. 이 과정에서 우리 뇌는 가용한 에너지(포도당)가 일시적으로 부족해지면서 극심한 피로, 졸음, 집중력 저하, 그리고 단 음식을 다시 갈구하는 가짜 허기를 느끼게 되는 것입니다.
+                </p>
+
+                <div class="highlight-box">
+                    <h4>💡 혈당 건강을 지키는 '거꾸로 식사법' 루틴</h4>
+                    <p>
+                        주문한 메뉴를 먹을 때 단순한 순서 변경만으로 혈당 스파이크를 줄일 수 있습니다. 반찬으로 나오는 샐러드나 나물 등 **식이섬유**를 가장 먼저 섭취합니다. 그 다음 고기, 생선, 달걀, 두부 등의 **단백질과 지방**을 먹고, 마지막으로 밥, 면, 감자 등의 **탄수화물**을 섭취합니다. 식이섬유가 위벽을 코팅하여 포도당의 흡수 속도를 서서히 늦추어 주므로 인슐린 분비가 평탄하게 관리됩니다.
+                    </p>
+                </div>
+
+                <h2>2. 외식 나트륨 섭취를 줄이는 국물 요리 소화 공식</h2>
+                <p>
+                    한국인 직장인들이 애용하는 부대찌개, 순대국, 뼈해장국 등 뚝배기 국물 요리는 고단백이면서 몸을 따뜻하게 해주지만 소금(나트륨) 함량이 매우 높습니다. 세계보건기구(WHO)의 일일 권장 나트륨양은 2,000mg(소금 5g)이지만, 대부분의 찌개나 국밥 한 그릇의 국물에는 권장량을 초과하는 나트륨이 포함되어 있습니다.
+                </p>
+                <p>
+                    과도한 나트륨 섭취는 혈압 상승을 유발하여 고혈압, 만성 위염, 신장 기능 저하의 원인이 됩니다. 이를 예방하기 위해 가장 중요한 실천 지침은 **'국물 남기기'**입니다. 건더기를 국자나 숟가락으로 건져내어 밥공기에 덜어 먹고, 짜고 자극적인 국물은 절반 이상 그대로 남깁니다. 이것만 실천해도 1회 점심 식사의 염분 섭취를 50% 가까이 감량할 수 있습니다.
+                </p>
+
+                <h2>3. 다이어트와 근손실 방지를 위한 탄단지(Macro) 계산법</h2>
+                <p>
+                    점심 식단을 짤 때 단순히 칼로리 수치만을 보는 것보다는 3대 영양소인 탄수화물, 단백질, 지방의 구성 비율(탄단지 비율)을 확인하는 것이 좋습니다. 일반적인 건강 유지용 탄단지 구성 비율은 **탄수화물 50% : 단백질 30% : 지방 20%**가 적절합니다.
+                </p>
+                <ul>
+                    <li><strong>탄수화물 (Carbs):</strong> 에너지를 공급하지만, 정제 밀가루나 흰쌀 대신 식이섬유가 많은 잡곡밥, 통밀빵, 오트밀, 혹은 메밀을 선택하는 것이 좋습니다.</li>
+                    <li><strong>단백질 (Protein):</strong> 면역력 유지와 근육 보존의 핵심입니다. 한 끼 식사에 닭가슴살, 계란, 등푸른 생선, 혹은 소고기 살코기 등으로 최소 20g~30g의 단백질을 포함해야 포만감이 오래 유지됩니다.</li>
+                    <li><strong>지방 (Fat):</strong> 호르몬 대사를 돕는 필수 성분이지만, 튀김류의 트랜스 지방보다는 연어, 아보카도, 들기름, 올리브유 등 불포화지방산이 풍부한 양질의 지방을 선호해야 합니다.</li>
+                </ul>
+
+                <h2>4. 일상의 소소한 식후 웰니스 팁</h2>
+                <p>
+                    식사가 끝난 직후 자리에 앉아 바로 모니터를 들여다보는 대신, 주변 동료들과 가볍게 10분 동안 산책로를 걸어 보세요. 가벼운 유산소 활동은 식후 혈당 수치를 급격히 낮추고 인슐린 저항성을 개선하는 가장 확실한 생리학적 치료제입니다. 또한 식사 후 갈증을 해소하기 위해 가당 음료(믹스 커피, 탄산음료) 대신 아이스 아메리카노나 캐모마일 차를 곁들이면 깔끔하게 소화를 돕고 칼로리 누수를 방해하지 않는 훌륭한 식후 마무리가 될 것입니다.
+                </p>
+            </article>
+
+            <div class="back-btn-wrap">
+                <a href="index.html" class="back-btn">룰렛 돌리러 가기</a>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p class="footer-main">🍽️ 오늘 뭐 먹지? — 직장인 점심 메뉴 추천 서비스</p>
+                <p class="footer-sub">© 2026 오늘 뭐 먹지? All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
