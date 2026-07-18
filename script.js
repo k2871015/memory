@@ -336,8 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
         naverMapLink.href = naverUrl;
         kakaoMapLink.href = kakaoUrl;
 
-        // 📍 초정밀 인앱 로컬 배달 지도 렌더링 호출
-        renderInAppMap(menu.name);
+        // 📍 초정밀 인앱 로컬 배달 지도 렌더링 호출 (에러 예외 격리)
+        try {
+            renderInAppMap(menu.name);
+        } catch (mapError) {
+            console.error('Kakao map load failed, falling back to static search:', mapError);
+            inAppMap.style.display = 'none';
+            fallbackMapBtns.style.display = 'flex';
+        }
 
         // B2B Delivery Deep Links
         baeminLink.href = 'baemin://search?keyword=' + encodeURIComponent(menu.name);
@@ -558,26 +564,27 @@ window.acceptCookies = function() {
 
 // ===== KAKAO IN-APP MAP SYSTEM =====
 function renderInAppMap(menuName) {
-    // 1. 카카오 API 존재 여부 및 서비스 라이브러리 검증 (Graceful Degradation 예외 처리)
-    if (!window.kakao || !window.kakao.maps || !window.kakao.maps.services) {
-        inAppMap.style.display = 'none';
-        fallbackMapBtns.style.display = 'flex';
-        return;
-    }
+    try {
+        // 1. 카카오 API 존재 여부 및 서비스 라이브러리 검증 (Graceful Degradation 예외 처리)
+        if (!window.kakao || !window.kakao.maps || !window.kakao.maps.services) {
+            inAppMap.style.display = 'none';
+            fallbackMapBtns.style.display = 'flex';
+            return;
+        }
 
-    const lat = userLat || 37.5665;
-    const lng = userLng || 126.9780;
-    const centerPos = new kakao.maps.LatLng(lat, lng);
+        const lat = userLat || 37.5665;
+        const lng = userLng || 126.9780;
+        const centerPos = new kakao.maps.LatLng(lat, lng);
 
-    inAppMap.style.display = 'block';
-    fallbackMapBtns.style.display = 'none';
+        inAppMap.style.display = 'block';
+        fallbackMapBtns.style.display = 'none';
 
-    // 지도 인스턴스 생성
-    const mapOptions = {
-        center: centerPos,
-        level: 4
-    };
-    const map = new kakao.maps.Map(inAppMap, mapOptions);
+        // 지도 인스턴스 생성
+        const mapOptions = {
+            center: centerPos,
+            level: 4
+        };
+        const map = new kakao.maps.Map(inAppMap, mapOptions);
 
     // 내 위치 핀 마커 표시
     const centerMarker = new kakao.maps.Marker({
@@ -614,6 +621,11 @@ function renderInAppMap(menuName) {
             fallbackMapBtns.style.display = 'flex';
         }
     }, searchOptions);
+    } catch (err) {
+        console.error('Error inside renderInAppMap:', err);
+        inAppMap.style.display = 'none';
+        fallbackMapBtns.style.display = 'flex';
+    }
 }
 
 function displayPlaceMarker(map, place, bounds) {
