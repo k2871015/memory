@@ -345,9 +345,23 @@ document.addEventListener('DOMContentLoaded', () => {
             fallbackMapBtns.style.display = 'flex';
         }
 
-        // B2B Delivery Deep Links
-        baeminLink.href = 'baemin://search?keyword=' + encodeURIComponent(menu.name);
-        coupangeatsLink.href = 'coupangeats://search?q=' + encodeURIComponent(menu.name);
+        // B2B Delivery Deep Links (Hybrid check for Mobile & PC)
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobileDevice) {
+            baeminLink.href = 'baemin://search?keyword=' + encodeURIComponent(menu.name);
+            coupangeatsLink.href = 'coupangeats://search?q=' + encodeURIComponent(menu.name);
+            baeminLink.onclick = null;
+            coupangeatsLink.onclick = null;
+        } else {
+            baeminLink.href = 'https://www.baemin.com/';
+            coupangeatsLink.href = 'https://eats.coupang.com/';
+            baeminLink.onclick = function(e) {
+                alert('💡 배민 앱 검색 딥링크는 모바일(스마트폰) 환경에서 누르시면 배민 앱이 즉시 실행되어 검색됩니다!\nPC에서는 배달의민족 웹사이트로 이동합니다.');
+            };
+            coupangeatsLink.onclick = function(e) {
+                alert('💡 쿠팡이츠 검색 딥링크는 모바일(스마트폰) 환경에서 누르시면 쿠팡이츠 앱이 즉시 실행되어 검색됩니다!\nPC에서는 쿠팡이츠 웹사이트로 이동합니다.');
+            };
+        }
 
         // Dynamic Affiliate Recommendation
         let recommendItem = AFFILIATE_PRODUCTS.default;
@@ -637,18 +651,28 @@ function displayPlaceMarker(map, place, bounds) {
 
     bounds.extend(markerPos);
 
-    // 배달앱 연동 검색 쿼리 딥링크 바인딩
+    // 배달앱 연동 검색 쿼리 딥링크 및 하이브리드 바인딩
     const shopQuery = encodeURIComponent(place.place_name);
-    const baeminDeep = `baemin://search?keyword=${shopQuery}`;
-    const eatsDeep = `coupangeats://search?q=${shopQuery}`;
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let baeminHref, eatsHref, clickAlert;
+    if (isMobile) {
+        baeminHref = `baemin://search?keyword=${shopQuery}`;
+        eatsHref = `coupangeats://search?q=${shopQuery}`;
+        clickAlert = "";
+    } else {
+        baeminHref = `https://www.baemin.com/`;
+        eatsHref = `https://eats.coupang.com/`;
+        clickAlert = `onclick="alert('💡 배민 앱 검색 딥링크는 모바일(스마트폰) 환경에서 누르시면 배민 앱이 즉시 실행되어 해당 매장이 검색됩니다!\nPC에서는 배달의민족 웹사이트로 이동합니다.');"`;
+    }
 
     const content = `
         <div style="padding:10px; width:220px; font-family:'Noto Sans KR', sans-serif; background:#1e293b; color:#f8fafc; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
             <h4 style="margin:0 0 4px; font-size:12px; font-weight:700; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${place.place_name}</h4>
             <p style="margin:0 0 8px; font-size:10px; color:#94a3b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${place.road_address_name || place.address_name}</p>
             <div style="display:flex; gap:6px;">
-                <a href="${baeminDeep}" target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#2ac1bc; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">🛵 배민</a>
-                <a href="${eatsDeep}" target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#00b2ee; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">⚡ 이츠</a>
+                <a href="${baeminHref}" ${clickAlert} target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#2ac1bc; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">🛵 배민</a>
+                <a href="${eatsHref}" ${clickAlert.replace('배민', '쿠팡이츠')} target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#00b2ee; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">⚡ 이츠</a>
             </div>
         </div>
     `;
