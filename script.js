@@ -79,6 +79,45 @@ document.addEventListener('DOMContentLoaded', () => {
         "가까운 동료와 가벼운 스몰토크로 리프레시! 💬"
     ];
 
+    // ===== AFFILIATE PRODUCTS DATABASE =====
+    const AFFILIATE_PRODUCTS = {
+        light: {
+            emoji: '🥗',
+            name: '맛있닭 닭가슴살 볶음밥 패키지 (10팩)',
+            price: '특가 21,900원',
+            desc: '칼로리를 확실히 줄여 줄 고단백 닭가슴살 한 끼 식단입니다!',
+            link: 'https://link.coupang.com/a/customRef?land=https%3A%2F%2Fwww.coupang.com%2Fnp%2Fsearch%3Fq%3D%25EB%258B%25AD%25EA%25B0%258B%25EC%258A%25B8%25EC%2582%25B8%25EB%25B3%25B6%25EC%259D%258C%25EB%25B0%25A5'
+        },
+        stress: {
+            emoji: '🔥',
+            name: '프레시지 마라탕 밀키트 (2인분)',
+            price: '특가 13,800원',
+            desc: '스트레스를 싹 날려버릴 얼얼하고 매콤한 리얼 마라탕 밀키트입니다!',
+            link: 'https://link.coupang.com/a/customRef?land=https%3A%2F%2Fwww.coupang.com%2Fnp%2Fsearch%3Fq%3D%25EB%25A7%2588%25EB%259D%25BC%25ED%2583%2595%25EB%25B0%2580%25ED%2582%25A4%25ED%258A%25B8'
+        },
+        rain: {
+            emoji: '☔',
+            name: '심플리쿡 얼큰 버섯 만두전골/국수 밀키트',
+            price: '특가 12,500원',
+            desc: '비 오는 날 최고의 선택! 뜨끈하고 진한 국물 요리를 집에서 간편하게 즐기세요.',
+            link: 'https://link.coupang.com/a/customRef?land=https%3A%2F%2Fwww.coupang.com%2Fnp%2Fsearch%3Fq%3D%25EA%25B5%25AD%25EB%25AC%25BC%25EB%25B0%2580%25ED%2582%25A4%25ED%258A%25B8'
+        },
+        tired: {
+            emoji: '💪',
+            name: '비맥스 메타 고함량 활력 비타민B군 (120정)',
+            price: '최저가 보장',
+            desc: '피로 누적으로 지쳐 쓰러지기 직전인 직장인에게 꼭 필요한 활력 포뮬러입니다.',
+            link: 'https://link.coupang.com/a/customRef?land=https%3A%2F%2Fwww.coupang.com%2Fnp%2Fsearch%3Fq%3D%25ED%2594%25BC%25EB%25A1%259C%25ED%259A%258C%25EB%25B3%25B5%25EC%2598%2581%25EC%2596%2596%25EC%25A0%259C'
+        },
+        default: {
+            emoji: '💊',
+            name: '고려은단 멀티비타민 올인원 (60정)',
+            price: '특가 16,900원',
+            desc: '영양 불균형이 오기 쉬운 직장인들의 기초 체력 증진을 위한 데일리 종합 영양제.',
+            link: 'https://link.coupang.com/a/customRef?land=https%3A%2F%2Fwww.coupang.com%2Fnp%2Fsearch%3Fq%3D%25EC%25A2%2585%25ED%2595%25A9%25EB%2584%2581%25ED%2583%2580%25EB%25AF%25BC'
+        }
+    };
+
     // ===== ELEMENTS =====
     const moodBtns = document.querySelectorAll('.mood-btn');
     const calorieBtns = document.querySelectorAll('.calorie-btn');
@@ -113,6 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const shareKakaoBtn = document.getElementById('shareKakaoBtn');
     const shareTgBtn = document.getElementById('shareTgBtn');
     const shareLinkBtn = document.getElementById('shareLinkBtn');
+    
+    // Monetization Elements
+    const baeminLink = document.getElementById('baeminLink');
+    const coupangeatsLink = document.getElementById('coupangeatsLink');
+    const shoppingRecommendCard = document.getElementById('shoppingRecommendCard');
+    const shopItemEmoji = document.getElementById('shopItemEmoji');
+    const shopItemName = document.getElementById('shopItemName');
+    const shopItemPrice = document.getElementById('shopItemPrice');
+    const shopItemDesc = document.getElementById('shopItemDesc');
+    const shopItemLink = document.getElementById('shopItemLink');
 
     // ===== STATE =====
     let selectedMood = 'random';
@@ -284,6 +333,29 @@ document.addEventListener('DOMContentLoaded', () => {
         resultMeta.textContent = `📍 맛집 키워드: ${region} ${menu.name} 맛집`;
         naverMapLink.href = naverUrl;
         kakaoMapLink.href = kakaoUrl;
+
+        // B2B Delivery Deep Links
+        baeminLink.href = 'baemin://search?keyword=' + encodeURIComponent(menu.name);
+        coupangeatsLink.href = 'coupangeats://search?q=' + encodeURIComponent(menu.name);
+
+        // Dynamic Affiliate Recommendation
+        let recommendItem = AFFILIATE_PRODUCTS.default;
+        if (menu.kcal <= 500) {
+            recommendItem = AFFILIATE_PRODUCTS.light;
+        } else if (selectedMood === 'stress') {
+            recommendItem = AFFILIATE_PRODUCTS.stress;
+        } else if (selectedMood === 'rain') {
+            recommendItem = AFFILIATE_PRODUCTS.rain;
+        } else if (selectedMood === 'tired') {
+            recommendItem = AFFILIATE_PRODUCTS.tired;
+        }
+
+        shopItemEmoji.textContent = recommendItem.emoji;
+        shopItemName.textContent = recommendItem.name;
+        shopItemPrice.textContent = recommendItem.price;
+        shopItemDesc.textContent = recommendItem.desc;
+        shopItemLink.href = recommendItem.link;
+        shoppingRecommendCard.style.display = 'block';
 
         // Post-meal Action
         const actionText = ACTIONS[Math.floor(Math.random() * ACTIONS.length)];
