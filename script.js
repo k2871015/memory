@@ -162,6 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const shopItemPrice = document.getElementById('shopItemPrice');
     const shopItemDesc = document.getElementById('shopItemDesc');
     const shopItemLink = document.getElementById('shopItemLink');
+    const inAppMap = document.getElementById('inAppMap');
+    const fallbackMapBtns = document.getElementById('fallbackMapBtns');
 
     // ===== STATE =====
     let selectedMood = 'random';
@@ -333,6 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resultMeta.textContent = `📍 맛집 키워드: ${region} ${menu.name} 맛집`;
         naverMapLink.href = naverUrl;
         kakaoMapLink.href = kakaoUrl;
+
+        // 📍 초정밀 인앱 로컬 배달 지도 렌더링 호출
+        renderInAppMap(menu.name);
 
         // B2B Delivery Deep Links
         baeminLink.href = 'baemin://search?keyword=' + encodeURIComponent(menu.name);
@@ -550,4 +555,99 @@ window.acceptCookies = function() {
         }, 300);
     }
 };
+
+// ===== KAKAO IN-APP MAP SYSTEM =====
+function renderInAppMap(menuName) {
+    // 1. 카카오 API 존재 여부 및 서비스 라이브러리 검증 (Graceful Degradation 예외 처리)
+    if (!window.kakao || !window.kakao.maps || !window.kakao.maps.services) {
+        inAppMap.style.display = 'none';
+        fallbackMapBtns.style.display = 'flex';
+        return;
+    }
+
+    const lat = userLat || 37.5665;
+    const lng = userLng || 126.9780;
+    const centerPos = new kakao.maps.LatLng(lat, lng);
+
+    inAppMap.style.display = 'block';
+    fallbackMapBtns.style.display = 'none';
+
+    // 지도 인스턴스 생성
+    const mapOptions = {
+        center: centerPos,
+        level: 4
+    };
+    const map = new kakao.maps.Map(inAppMap, mapOptions);
+
+    // 내 위치 핀 마커 표시
+    const centerMarker = new kakao.maps.Marker({
+        position: centerPos,
+        map: map
+    });
+
+    const centerInfoWindow = new kakao.maps.InfoWindow({
+        content: '<div style="padding:5px;font-size:11px;color:#1e293b;font-weight:bold;text-align:center;font-family:sans-serif;">내 위치📍</div>'
+    });
+    centerInfoWindow.open(map, centerMarker);
+
+    // 카카오 로컬 검색 API 구동
+    const ps = new kakao.maps.services.Places();
+    const searchOptions = {
+        location: centerPos,
+        radius: 1200, // 1.2km 반경 탐색
+        sort: kakao.maps.services.SortBy.ACCURACY
+    };
+
+    ps.keywordSearch(menuName, function(data, status, pagination) {
+        if (status === kakao.maps.services.Status.OK) {
+            const bounds = new kakao.maps.LatLngBounds();
+            bounds.extend(centerPos);
+
+            // 혼잡 방지를 위해 최대 6개 로컬 맛집 마커 노출
+            for (let i = 0; i < Math.min(data.length, 6); i++) {
+                displayPlaceMarker(map, data[i], bounds);
+            }
+            map.setBounds(bounds);
+        } else {
+            // 검색 실패 시 우아하게 폴백 검색 버튼 노출
+            inAppMap.style.display = 'none';
+            fallbackMapBtns.style.display = 'flex';
+        }
+    }, searchOptions);
+}
+
+function displayPlaceMarker(map, place, bounds) {
+    const markerPos = new kakao.maps.LatLng(place.y, place.x);
+    const marker = new kakao.maps.Marker({
+        position: markerPos,
+        map: map
+    });
+
+    bounds.extend(markerPos);
+
+    // 배달앱 연동 검색 쿼리 딥링크 바인딩
+    const shopQuery = encodeURIComponent(place.place_name);
+    const baeminDeep = `baemin://search?keyword=${shopQuery}`;
+    const eatsDeep = `coupangeats://search?q=${shopQuery}`;
+
+    const content = `
+        <div style="padding:10px; width:220px; font-family:'Noto Sans KR', sans-serif; background:#1e293b; color:#f8fafc; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+            <h4 style="margin:0 0 4px; font-size:12px; font-weight:700; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${place.place_name}</h4>
+            <p style="margin:0 0 8px; font-size:10px; color:#94a3b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${place.road_address_name || place.address_name}</p>
+            <div style="display:flex; gap:6px;">
+                <a href="${baeminDeep}" target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#2ac1bc; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">🛵 배민</a>
+                <a href="${eatsDeep}" target="_blank" style="flex:1; text-align:center; padding:5px 0; background:#00b2ee; color:#fff; font-size:10px; font-weight:700; border-radius:4px; text-decoration:none; display:inline-block;">⚡ 이츠</a>
+            </div>
+        </div>
+    `;
+
+    const infowindow = new kakao.maps.InfoWindow({
+        content: content,
+        removable: true
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
+}
 
